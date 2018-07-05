@@ -22,10 +22,10 @@ access_id: ABCDEFG1HIJKLMNOP2QRS
 
 The `assume` action requires the following flags:
 
-    * `-s` or `--source`: The source AWS account you will be assuming from.
-    * `-d` or `--destination`: The destination AWS account where the role you want to assume resides.
-    * `-u` or `--user`:  Your IAM user name.
-    * `-r` or `--role`: The IAM cross account role you would like to assume.
+* `-s` or `--source`: The source AWS account you will be assuming from.
+* `-d` or `--destination`: The destination AWS account where the role you want to assume resides.
+* `-u` or `--user`:  Your IAM user name.
+* `-r` or `--role`: The IAM cross account role you would like to assume.
 
 ```bash
 $ rrole assume -u test_user -s 123456789012 -d 98765432109 -r hot_cross_role
