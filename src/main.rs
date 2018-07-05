@@ -43,7 +43,7 @@ main!(|args: Cli, log_level: verbosity| {
             Ok(output) => {
                 println!("account: {}", output.account.unwrap());
                 println!("arn: {}", output.arn.unwrap());
-                println!("user_id: {}", output.user_id.unwrap());
+                println!("access_id: {}", output.user_id.unwrap());
             }
             Err(error) => {
                 println!("Error: {:?}", error);

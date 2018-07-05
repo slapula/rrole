@@ -15,7 +15,7 @@ USAGE:
 $ rrole status
 account: 123456789012
 arn: arn:aws:iam::123456789012:user/test_user
-user_id: ABCDEFG1HIJKLMNOP2QRS
+access_id: ABCDEFG1HIJKLMNOP2QRS
 ```
 
 `assume`: This action makes a call to AWS to assume a specific cross account role.  A successful call will set the appropriate environment variables with the values returned by the call.  The variables in question are `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN`.  This tool also populates an additional variable for use with the `status` action and it is called `AWS_SESSION_EXPIRES`.  It exists to allow the `status` action to determinte the time left in your session.
