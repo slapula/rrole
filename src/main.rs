@@ -21,10 +21,10 @@ struct Cli {
     action: String,
     #[structopt(long = "user", short = "u", help = "Username", default_value = "")]
     user: String,
-    #[structopt(long = "source", short = "s", help = "Source Account", default_value = "")]
-    source: String,
-    #[structopt(long = "destination", short = "d", help = "Destination Account", default_value = "")]
-    destination: String,
+    #[structopt(long = "source", short = "s", help = "Source Account Number", default_value = "")]
+    source_acct: String,
+    #[structopt(long = "destination", short = "d", help = "Destination Account Number", default_value = "")]
+    destination_acct: String,
     #[structopt(long = "role", short = "r", help = "Cross Account IAM Role", default_value = "")]
     role: String,
     #[structopt(long = "mfa", short = "m", help = "MFA Token")]
@@ -68,9 +68,9 @@ main!(|args: Cli, log_level: verbosity| {
         mfa_token.pop();
 
         match client.assume_role(&AssumeRoleRequest{
-            role_arn: format!("arn:aws:iam::{}:role/{}", args.destination, args.role),
+            role_arn: format!("arn:aws:iam::{}:role/{}", args.destination_acct, args.role),
             role_session_name: format!("{}_rusoto_session", args.user),
-            serial_number: Some(format!("arn:aws:iam::{}:mfa/{}", args.source, args.user)),
+            serial_number: Some(format!("arn:aws:iam::{}:mfa/{}", args.source_acct, args.user)),
             token_code: Some(mfa_token),
             ..Default::default()
         }).sync() {
