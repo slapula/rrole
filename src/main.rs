@@ -59,9 +59,7 @@ main!(|args: Cli, log_level: verbosity| {
             }
             Err(_) => print!(""),
         }
-    }
-
-    if args.action == "assume" {
+    } else if args.action == "assume" {
         println!("Please enter MFA token: ");
         let mut mfa_token = String::new();
         io::stdin().read_line(&mut mfa_token).ok().expect("Failed to read input");
@@ -87,9 +85,7 @@ main!(|args: Cli, log_level: verbosity| {
                 println!("Error: {:?}", error);
             }
         }
-    }
-
-    if args.action == "reset" {
+    } else if args.action == "reset" {
         println!("Resetting assumed role variables...");
         Command::new("bash")
             .env_remove("AWS_ACCESS_KEY_ID")
@@ -97,5 +93,7 @@ main!(|args: Cli, log_level: verbosity| {
             .env_remove("AWS_SESSION_TOKEN")
             .env_remove("AWS_SESSION_EXPIRES")
             .status().expect("sh command failed to start");
+    } else {
+        println!("Invalid action.  Valid actions: status, assume, reset");
     }
 });
