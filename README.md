@@ -7,6 +7,8 @@ USAGE:
 
 `rrole` exists as both my introduction to the Rust programming language and a tool for me to manage AWS cross account role assumption.  There are several main actions this tool can perform.
 
+## Actions
+
 `status`: This action describes your current credentials and, if assumed into a role, the time remaining in the session.
 
 ```bash
