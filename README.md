@@ -1,11 +1,11 @@
 # Rust Role (RRole)
 
+`rrole` exists as both my introduction to the Rust programming language and a tool for me to manage AWS cross account role assumption.  There are several main actions this tool can perform.
+
 ```bash
 USAGE:
     rrole <action> --source <source_acct> --destination <destination_acct> --user <user> --role <role>
 ```
-
-`rrole` exists as both my introduction to the Rust programming language and a tool for me to manage AWS cross account role assumption.  There are several main actions this tool can perform.
 
 ## Actions
 
