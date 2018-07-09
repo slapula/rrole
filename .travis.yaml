@@ -1,0 +1,79 @@
+# Based on the "trust" template v0.1.2
+# https://github.com/japaric/trust/tree/v0.1.2
+
+dist: trusty
+language: rust
+services: docker
+sudo: required
+
+env:
+  global:
+    - CRATE_NAME=rrole
+
+matrix:
+  include:
+    # Linux
+    - env: TARGET=aarch64-unknown-linux-gnu
+    - env: TARGET=arm-unknown-linux-gnueabi
+    - env: TARGET=i686-unknown-linux-gnu
+    - env: TARGET=i686-unknown-linux-musl
+    - env: TARGET=x86_64-unknown-linux-gnu
+    - env: TARGET=x86_64-unknown-linux-musl
+
+    # OSX
+    - env: TARGET=i686-apple-darwin
+      os: osx
+    - env: TARGET=x86_64-apple-darwin
+      os: osx
+
+    # Windows
+    - env: TARGET=x86_64-pc-windows-gnu
+    - env: TARGET=x86_64-pc-windows-msvc
+
+    # Testing other channels
+    - env: TARGET=x86_64-unknown-linux-gnu
+      rust: nightly
+    - env: TARGET=x86_64-apple-darwin
+      os: osx
+      rust: nightly
+
+before_install:
+  - set -e
+  - rustup self update
+
+install:
+  - sh ci/install.sh
+  - source ~/.cargo/env || true
+
+script:
+  - bash ci/script.sh
+
+after_script: set +e
+
+before_deploy:
+  - sh ci/before_deploy.sh
+
+deploy:
+  api_key:
+    secure: "hBx+M0EU4mCCiForcJOcTTctxul5LrY7CxgItoEGN9F3lTXUvoh69qd2NdNfS/lAwrVh4ZZ+iAF88mT7Qj9Mwx/4a8ZYGiB1nKGCz5wsZqizc1F1qR/yLtpgaIKlksxRkMdGlb1Au1zU9UDwnffAy21T9qOZ33ZvlHEKGdzliGDbNTwoyuWbwHPRHLmSakKUC/2v8fEUtw43OheyPgPNYlqfVq7o3KY32SQ0Jmer2b5yU/gnP6oLJo4aWSaYgodkqOQQGalh8S3R0iGzOTsDoEEIi6iTv/NNLXx6zicyuDzM4pL+F550xw/rZadfpYp2dbtlv2/emGO2ImihmZm6vo7qanWJZOi6An224TKpPVHWp3hOquNVLAlULXw580fo5MrEKEsjZ4F59Xjx9X3CvIa5xs8INfP6SZqG0TDR/58IkOIV1HuwY8tbJvP40IbIgP+z/GRgWVatSi2dVgUG0xa3Z2y7I26RuiHAjFoXVDCSYdoy9GPGrtp/UluR2pTJhG/2T9keIa8cOkFg8FNPL/3lADTWqzEa0uri6RMNZQNcXtuDy+olrnAeXwKk/YdqiYtYzghEza5CjGQ/8LQY237bcAFV/4srpWNhnUhYuqcvJDu7GZjFFK1CkVatPwPwWczT5TNc78xBdds0ROfbvjN6ecXvq/3eykNssDcSHFU="
+  file_glob: true
+  file: $CRATE_NAME-$TRAVIS_TAG-$TARGET.*
+  on:
+    condition: $TRAVIS_RUST_VERSION = stable
+    tags: true
+  provider: releases
+  skip_cleanup: true
+
+cache: cargo
+before_cache:
+  - chmod -R a+r $HOME/.cargo
+
+branches:
+  only:
+    # release tags
+    - /^v\d+\.\d+\.\d+.*$/
+    - master
+
+notifications:
+  email:
+    on_success: never
