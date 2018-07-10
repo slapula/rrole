@@ -1,6 +1,6 @@
 [package]
 name = "rrole"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Aaron J. Smith <ajsmith10381@gmail.com>"]
 
 [dependencies]
