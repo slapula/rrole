@@ -26,9 +26,10 @@ The `assume` action requires the following flags:
 * `-d` or `--destination`: The destination AWS account where the role you want to assume resides.
 * `-u` or `--user`:  Your IAM user name.
 * `-r` or `--role`: The IAM cross account role you would like to assume.
+* `-m` or `--mfa`: Enables MFA for this session if required. As a result, this flag is optional.
 
 ```bash
-$ rrole assume -u test_user -s 123456789012 -d 98765432109 -r hot_cross_role
+$ rrole assume -u test_user -s 123456789012 -d 98765432109 -r hot_cross_role --mfa
 Please enter MFA token:
 123456
 $
@@ -41,7 +42,3 @@ $ rrole reset
 Resetting assumed role variables...
 $
 ```
-
-## ToDo
-
-* Make MFA optional
