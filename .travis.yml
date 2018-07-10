@@ -14,23 +14,33 @@ env:
 matrix:
   include:
     # Linux
-    - env: TARGET=x86_64-unknown-linux-gnu NAME=linux-x86_64-gnu
-    - env: TARGET=x86_64-unknown-linux-musl NAME=linux-x86_64-musl
-    - env: TARGET=i686-unknown-linux-gnu NAME=linux-i686-gnu
-    - env: TARGET=i686-unknown-linux-musl NAME=linux-i686-musl
-    - env: TARGET=aarch64-unknown-linux-gnu NAME=linux-aarch64-gnu
-    - env: TARGET=arm-unknown-linux-gnueabi NAME=linux-arm-gnueabi
+    - env: TARGET=x86_64-unknown-linux-gnu
+      env: NAME=linux-x86_64-gnu
+    - env: TARGET=x86_64-unknown-linux-musl
+      env: NAME=linux-x86_64-musl
+    - env: TARGET=i686-unknown-linux-gnu
+      env: NAME=linux-i686-gnu
+    - env: TARGET=i686-unknown-linux-musl
+      env: NAME=linux-i686-musl
+    - env: TARGET=aarch64-unknown-linux-gnu
+      env: NAME=linux-aarch64-gnu
+    - env: TARGET=arm-unknown-linux-gnueabi
+      env: NAME=linux-arm-gnueabi
 
     # OSX
-    - env: TARGET=i686-apple-darwin NAME=apple-i686-darwin
+    - env: TARGET=i686-apple-darwin
+      env: NAME=apple-i686-darwin
       os: osx
-    - env: TARGET=x86_64-apple-darwin NAME=apple-x86_64-darwin
+    - env: TARGET=x86_64-apple-darwin
+      env: NAME=apple-x86_64-darwin
       os: osx
 
     # Testing other channels
-    - env: TARGET=x86_64-unknown-linux-gnu NAME=linux-x86_64-gnu
+    - env: TARGET=x86_64-unknown-linux-gnu
+      env: NAME=linux-x86_64-gnu
       rust: nightly
-    - env: TARGET=x86_64-apple-darwin NAME=apple-x86_64-darwin
+    - env: TARGET=x86_64-apple-darwin
+      env: NAME=apple-x86_64-darwin
       os: osx
       rust: nightly
 
