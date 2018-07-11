@@ -5,6 +5,8 @@ license = "MIT"
 authors = ["Aaron J. Smith <ajsmith10381@gmail.com>"]
 categories = ["authentication", "command-line-interface"]
 description = "Assume IAM roles with this Rust-based command line utility"
+readme = "README.md"
+homepage = "https://github.com/slapula/rrole"
 repository = "https://github.com/slapula/rrole"
 keywords = ["aws", "sts", "cli", "role", "iam"]
 
